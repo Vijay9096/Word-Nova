@@ -7,17 +7,23 @@
   const SPIN_COST=30;
   const DAILY_KEY="luckyspin_free_date";
   const REWARDS=[
-    {type:"coins",value:50,color:"#FFD54F",labelNumber:"50",labelEmoji:"â­"},
-    {type:"coins",value:100,color:"#FFB300",labelNumber:"100",labelEmoji:"â­"},
-    {type:"hints",value:1,color:"#80DEEA",labelNumber:"+1",labelEmoji:"ðŸ’¡"},
-    {type:"coins",value:200,color:"#A5D6A7",labelNumber:"200",labelEmoji:"â­"},
-    {type:"hints",value:2,color:"#CE93D8",labelNumber:"+2",labelEmoji:"ðŸ’¡"},
-    {type:"coins",value:500,color:"#FF8A65",labelNumber:"500",labelEmoji:"â­"},
-    {type:"coins",value:300,color:"#4FC3F7",labelNumber:"300",labelEmoji:"â­"},
-    {type:"coins",value:1000,color:"#FF7043",labelNumber:"1000",labelEmoji:"â­"}
+    {type:"coins",value:50,color:"#FFD54F",labelNumber:"50",labelEmoji:"⭐"},
+    {type:"hints",value:5,color:"#80DEEA",labelNumber:"+5",labelEmoji:"💡"},
+    {type:"coins",value:100,color:"#FFB300",labelNumber:"100",labelEmoji:"⭐"},
+    {type:"hints",value:10,color:"#00AAFF",labelNumber:"+10",labelEmoji:"💡"},
+    {type:"coins",value:200,color:"#A5D6A7",labelNumber:"200",labelEmoji:"⭐"},
+    {type:"hints",value:20,color:"#CE93D8",labelNumber:"+20",labelEmoji:"💡"},
+    {type:"coins",value:500,color:"#FF8A65",labelNumber:"500",labelEmoji:"⭐"},
+    {type:"hints",value:50,color:"#00FFFF",labelNumber:"+50",labelEmoji:"💡"},
+    {type:"coins",value:300,color:"#4FC3F7",labelNumber:"300",labelEmoji:"⭐"},
+    {type:"hints",value:30,color:"#CE93D8",labelNumber:"+30",labelEmoji:"💡"},
+    {type:"coins",value:1000,color:"#FF7043",labelNumber:"1000",labelEmoji:"⭐"},
+    {type:"hints",value:80,color:"#CE93D8",labelNumber:"+80",labelEmoji:"💡"}
   ];
-  if(typeof window.coins==="undefined")window.coins=Number(localStorage.getItem("coins")||100);
-  if(typeof window.hints==="undefined")window.hints=Number(localStorage.getItem("hints")||3);
+  window.coins = Number(localStorage.getItem("coins"));
+  if (isNaN(window.coins)) window.coins = 0;
+  window.hints = Number(localStorage.getItem("hints"));
+  if (isNaN(window.hints)) window.hints = 0;
   const canvas=document.getElementById("spinCanvas");
   if(!canvas)return console.warn("LuckySpin: #spinCanvas missing");
   const overlay=document.getElementById("luckySpin");
@@ -57,60 +63,70 @@ function scaleCanvasForDPR(){
   }
   function todayStr(){return new Date().toISOString().slice(0,10);}
   function drawWheel(){
-    const cssW=canvas.clientWidth||canvas.width;
-    const cssH=canvas.clientHeight||canvas.height;
-    const w=cssW,h=cssH;
-    const cx=w/2,cy=h/2;
-    const radius=Math.min(cx,cy)-8;
-    const N=REWARDS.length;
-    const anglePer=(2*Math.PI)/N;
-    ctx.clearRect(0,0,w,h);
-    ctx.save();
-    ctx.translate(cx,cy);
-    for(let i=0;i<N;i++){
-      const p=REWARDS[i];
-      const start=i*anglePer;
-      const end=start+anglePer;
-      ctx.beginPath();
-      ctx.moveTo(0,0);
-      ctx.arc(0,0,radius,start,end);
-      ctx.closePath();
-      ctx.fillStyle=p.color;
-      ctx.fill();
-      ctx.strokeStyle="rgba(0,0,0,0.08)";
-      ctx.stroke();
-      const mid=start+anglePer/2;
-      ctx.save();
-      ctx.rotate(mid);
-      ctx.textAlign="center";
-      ctx.textBaseline="middle";
-      ctx.fillStyle="#111";
-      ctx.font="bold 14px system-ui, 'Segoe UI', Roboto, sans-serif";
-      ctx.fillText(p.labelNumber,radius*0.58-8,0);
-      ctx.font="18px 'Segoe UI Emoji','Noto Color Emoji','Apple Color Emoji', sans-serif";
-      ctx.fillText(p.labelEmoji,radius*0.58+20,0);
-      ctx.restore();
-    }
+  const w = canvas.clientWidth || 300;
+  const h = canvas.clientHeight || 300;
+
+  const cx = w / 2;
+  const cy = h / 2;
+  const radius = Math.min(cx, cy) - 10;
+
+  const N = REWARDS.length;
+  const angle = (2 * Math.PI) / N;
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  ctx.save();
+  ctx.translate(cx, cy);
+
+  for(let i = 0; i < N; i++){
+    const item = REWARDS[i];
+
+    const start = i * angle;
+    const end = start + angle;
+
     ctx.beginPath();
-    ctx.arc(0,0,radius*0.18,0,Math.PI*2);
-    ctx.fillStyle="#111";
+    ctx.moveTo(0, 0);
+    ctx.arc(0, 0, radius, start, end);
+    ctx.closePath();
+
+    ctx.fillStyle = item.color || "#ccc";
     ctx.fill();
-    ctx.fillStyle="#fff";
-    ctx.font="bold 14px sans-serif";
-    ctx.textAlign="center";
-    ctx.fillText("SPIN",0,0);
+
+    ctx.strokeStyle = "#222";
+    ctx.stroke();
+
+    const mid = start + angle / 2;
+
+    ctx.save();
+    ctx.rotate(mid);
+
+    ctx.fillStyle = "#111";
+    ctx.textAlign = "center";
+
+    ctx.font = "bold 14px sans-serif";
+    ctx.fillText(item.labelNumber, radius * 0.6, -5);
+
+    ctx.font = "18px sans-serif";
+    ctx.fillText(item.labelEmoji, radius * 0.6, 15);
+
     ctx.restore();
   }
+
+  ctx.restore();
+}
   function awardPrize(prize){
     if(!prize)return;
     if(prize.type==="coins"){
-      window.coins+=prize.value;
-      saveAll();updateAll();
-      if(elResult)elResult.textContent=`ðŸŽ‰ You won ${prize.value}â­ coins! (Total: ${window.coins}â­)`;
+      const add = Number(prize.value || 0);
+      window.coins = Number(window.coins || 0) + add;
+      saveAll();
+      updateAll();
+      showPopup(`🎉 You won ${add} coins!`);
       return;
     }
-    if (prize.type === "hints") {
-      window.hints = Number(window.hints || 0) + Number(prize.value || 0);
+      if (prize.type === "hints") {
+  const add = Number(prize.value || 0);
+  window.hints = Number(window.hints || 0) + add;
       try { hints = Number(window.hints); } catch(e) { /* ignore if not defined */ }
       localStorage.setItem("hints", String(window.hints));
       localStorage.setItem("persistentHintsBackup", String(window.hints));
@@ -120,7 +136,7 @@ function scaleCanvasForDPR(){
       const elHint = document.getElementById("hintCount");
       if (elHint) elHint.textContent = window.hints;
       try { window.dispatchEvent(new CustomEvent("hintsChanged", { detail: { hints: window.hints } })); } catch(e){}
-      if (elResult) elResult.textContent = `ðŸ’¡ You won ${prize.value} hints! (Total: ${window.hints})`;
+      showPopup(`💡 You won ${add} hints!`);
       return;
     }
     if(elResult)elResult.textContent="ðŸŽ You got a prize!";
@@ -128,7 +144,7 @@ function scaleCanvasForDPR(){
   function updateButtons(){
     const used=localStorage.getItem(DAILY_KEY)===todayStr();
     if(elFree){elFree.disabled=used||spinning;elFree.style.opacity=elFree.disabled?0.6:1;}
-    if(elBuy){elBuy.disabled=(window.coins<SPIN_COST)||spinning;elBuy.style.opacity=elBuy.disabled?0.6:1;}
+    if(elBuy){elBuy.disabled = (Number(window.coins) < SPIN_COST) || spinning;elBuy.style.opacity=elBuy.disabled?0.6:1;}
   }
   function openSpin(){
     if(overlay)overlay.classList.remove("hidden");
@@ -142,8 +158,14 @@ function scaleCanvasForDPR(){
   function startSpin(buy=false){
     if(spinning)return;
     if(buy){
-      if(window.coins<SPIN_COST){if(elResult)elResult.textContent="âš ï¸ Not enough coins!";return;}
-      window.coins-=SPIN_COST;saveAll();updateAll();
+    if (Number(window.coins) < SPIN_COST) {
+    showPopup("⚠️ Not enough coins!");
+    return;
+    }
+window.coins = Number(window.coins) - SPIN_COST;
+if (isNaN(window.coins)) window.coins = 0;
+saveAll();
+updateAll();
     } else {
       const today=todayStr();
       if(localStorage.getItem(DAILY_KEY)===today){if(elResult)elResult.textContent="âš ï¸ Free spin used today!";return;}

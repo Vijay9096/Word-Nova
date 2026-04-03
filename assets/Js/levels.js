@@ -186,7 +186,7 @@ function clearLocalStorage() {
   localStorage.setItem("unlockedThemes", JSON.stringify(unlockedThemes));
   localStorage.setItem("unlockedLevels", JSON.stringify(unlockedLevels));
   localStorage.setItem("usedWords", JSON.stringify({}));
-  if (savedCoins !== null) localStorage.setItem("coins", savedCoins);
+  if (savedCoins !== null) localStorage.setItem("coins", 99999999);
   if (savedHints !== null) localStorage.setItem("hints", savedHints);
   updateHintDisplay();
   updateCoinDisplay();

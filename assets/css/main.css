@@ -11,7 +11,7 @@ button:active { transform: scale(0.95); }
 .screen { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
 .hidden { opacity: 0; pointer-events: none; transition: 0.3s; }
 .container-pad { width: 90%; max-width: 700px; }
-.popup { position: fixed; inset: 0; background: rgba(0,0,0,0.6); display: flex; align-items: center; justify-content: center; z-index: 1000; }
+.popup { position: fixed; inset: 0; background: rgba(0,0,0,0.6); display: flex; align-items: center; justify-content: center; z-index: 99999; }
 .popup.hidden { display: none; }
 #popupbox{ background: #fff; color: #000; padding: 20px 30px; border-radius: 15px; text-align: center; box-shadow: 0 0 20px rgba(0,0,0,0.3); animation: popupIn 0.4s ease; }
 #levelcompletedpopupbox{ background: #fff; color: #000; padding: 15px 20px; border-radius: 15px; text-align: center; box-shadow: 0 0 20px rgba(0,0,0,0.3); animation: popupIn 0.4s ease; }
