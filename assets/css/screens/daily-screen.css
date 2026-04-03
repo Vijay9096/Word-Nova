@@ -1,0 +1,4 @@
+.daily-btns { display:flex; flex-direction:column; gap:0.8rem; margin-top:1rem; }
+.daily-btns button:active { transform: scale(0.95); }
+#daily-date { margin-top:0.4rem; }
+#daily-status { margin:0.4rem 0; }

@@ -1,0 +1,7 @@
+#levels { background: #303050; justify-content: flex-start; align-items: center; padding-top: 1.2rem; overflow: auto; overscroll-behavior: contain; }
+#level-title { margin-top: 0; margin-bottom: 0.6rem; }
+#level-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5rem; width: 90%; max-width: 420px; }
+.level-btn { position: relative; padding: 0.5rem; border-radius: 12px; font-weight: bold; cursor: pointer; text-align: center; background-color: #3b82f6;  color: white; border: none; transition: background-color 0.3s, opacity 0.3s; }
+.level-btn button:active { transform: scale(0.95); }
+.level-btn.locked { background-color: #555;  opacity: 0.5; pointer-events: none; }
+.level-btn.completed { background-color: #22c55e; }

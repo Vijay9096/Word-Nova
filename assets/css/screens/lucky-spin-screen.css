@@ -1,0 +1,6 @@
+#luckySpin { position:fixed; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.55); z-index:9999; }
+#luckySpinBox { background:var(--bg, #0f1724); color:var(--text, #e6eef8); border-radius:12px; padding:14px; width:90%; max-width:400px; border:2px solid var(--accent, #4cafef); box-sizing:border-box; text-align:center; }
+#spinPointer { width:0; height:0; border-left:12px solid transparent; border-right:12px solid transparent; border-top:16px solid var(--accent, #4cafef); margin:8px auto 0; }
+#spinCanvas { display:block; margin:8px auto 0; border-radius:50%; background:#08101a; width:300px; height:300px; }
+#spinButtons { display:flex; gap:8px; justify-content:center; margin-top:10px; flex-wrap:wrap; }
+#spinResult { text-align:center; margin-top:10px; font-weight:700; color:#bff7d8; }

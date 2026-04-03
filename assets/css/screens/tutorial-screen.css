@@ -1,0 +1,7 @@
+#tutorial-screen { background: var(--bg); color: var(--text); padding: 1.2rem; text-align: left; overflow-y: auto; min-height: 100vh; }
+#tutorial-screen h1 { text-align: center; color: var(--accent); margin-bottom: 1rem; }
+.tutorial-container { background: rgba(255,255,255,0.05); border-radius: 15px; padding: 1rem; max-width: 500px; margin-inline: auto; font-size: 1rem; line-height: 1.4rem; }
+#tutorial-screen h3 { color: var(--accent); margin-top: 1rem; }
+#tutorial-screen li { margin-left: 1rem; padding: 2px 0; }
+#tutorial-screen .back-btn { display: block; margin: 1.5rem auto 0; padding: 0.8rem 1.4rem; background: var(--accent); color: var(--text); border-radius: 10px; border: none; font-weight: bold; cursor: pointer; transition: 0.2s ease; }
+#tutorial-screen .back-btn:active { transform: scale(0.95); }

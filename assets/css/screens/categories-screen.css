@@ -1,0 +1,4 @@
+#categories { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; overflow: hidden; background: #252540; padding-top: 1.5rem; overflow: auto; }
+#cat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0; width: 90%; max-width: 420px; }
+#cat-grid button { position: relative; height: 48px; border: none; border-radius: 12px; background: var(--accent, #3b82f6); color: #fff; font-weight: bold; font-size: 1rem; text-align: center; cursor: pointer; transition: transform 0.1s ease, background 0.2s ease; }
+#cat-grid button:active { transform: scale(0.95); }

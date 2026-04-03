@@ -1,0 +1,22 @@
+#shop-screen { background: var(--bg, #19192b); color: var(--text, #fff); display: flex; flex-direction: column; height: 100vh; overflow: hidden; text-align: center; }
+.shop-header { background: var(--bg, #19192b); padding: 1rem 0 0.5rem; position: sticky; top: 0; z-index: 10; }
+.shop-header h1 { color: var(--accent, #4cafef); margin: 0; font-size: 1.6rem; }
+.shop-header p { margin: 0.3rem 0 0; font-weight: bold; }
+#shop-scroll { flex: 1; overflow-y: auto; padding-bottom: 1rem; }
+#hint-section,#chest-section,#theme-section { background: rgba(255,255,255,0.05); border-radius: 20px; padding: 1rem; max-width: 500px; margin: 1rem auto; box-shadow: 0 0 10px rgba(0,0,0,0.3); }
+#shop-scroll h2 { margin-bottom: 0.8rem; font-size: 1.2rem; color: var(--accent, #4cafef); text-shadow: 0 0 4px rgba(0,0,0,0.4); }
+#hint-shop-grid { display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap; }
+#hint-shop-grid button { background: var(--accent, #4cafef); border: none; border-radius: 10px; padding: 0.8rem; font-size: 0.8rem; font-weight: bold; width: 90px; height: 90px; color: #fff; cursor: pointer; transition: transform 0.2s; }
+#hint-shop-grid button:active { transform: scale(0.95); }
+#chest-shop-grid { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+#chest-shop-grid button { width: 95px; height: 95px; border-radius: 15px; border: none; font-weight: 600; font-size: clamp(0.8rem, 2vw, 0.9rem); text-align: center; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.3); transition: transform 0.2s, box-shadow 0.2s; }
+#chest-shop-grid button:active { transform: scale(0.95); }
+#chest-shop-grid button.common { background: linear-gradient(145deg, #00cc66, #33ff99); color: #fff; }
+#chest-shop-grid button.rare { background: linear-gradient(145deg, #3399ff, #66ccff); color: #fff; }
+#chest-shop-grid button.legendary { background: linear-gradient(145deg, #ffcc33, #ffb347); color: #222; }
+#theme-shop-grid { display: grid; grid-template-columns: repeat(2, minmax(180px, 1fr)); gap: 0; margin-top: 0.6rem; }
+#theme-shop-grid button { background: var(--accent, #4cafef); border: none; border-radius: 10px; height: 60px; color: #fff; font-size: 0.8rem; font-weight: bold; white-space: nowrap;overflow: hidden; padding: 2px; cursor: pointer; transition: transform 0.2s; }
+#theme-shop-grid button:active { transform: scale(0.95); }
+.shop-footer { padding: 0.8rem; }
+.shop-footer button { background: var(--accent, #4cafef); color: #fff; border: none; border-radius: 10px; padding: 0.7rem 1.4rem; font-weight: bold; cursor: pointer; transition: transform 0.2s; }
+.shop-footer button:active { transform: scale(0.95); }
