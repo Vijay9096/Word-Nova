@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" 
+    content="width=device-width,initial-scale=1" />
+<title>Word Search</title>
+<link rel="stylesheet" href="assets/css/main.css">
+<link rel="stylesheet" href="assets/css/animations.css">
+<link rel="stylesheet" href="assets/css/screens/start-screen.css">
+<link rel="stylesheet" href="assets/css/screens/difficulty-screen.css">
+<link rel="stylesheet" href="assets/css/screens/categories-screen.css">
+<link rel="stylesheet" href="assets/css/screens/levels-screen.css">
+<link rel="stylesheet" href="assets/css/screens/game-screen.css">
+<link rel="stylesheet" href="assets/css/screens/settings-screen.css">
+<link rel="stylesheet" href="assets/css/screens/themes-screen.css">
+<link rel="stylesheet" href="assets/css/screens/image-background.css">
+<link rel="stylesheet" href="assets/css/screens/about-screen.css">
+<link rel="stylesheet" href="assets/css/screens/achievements-screen.css">
+<link rel="stylesheet" href="assets/css/screens/profile-screen.css">
+<link rel="stylesheet" href="assets/css/screens/daily-screen.css">
+<link rel="stylesheet" href="assets/css/screens/daily-reward-screen.css">
+<link rel="stylesheet" href="assets/css/screens/shop-screen.css">
+<link rel="stylesheet" href="assets/css/screens/tutorial-screen.css">
+<link rel="stylesheet" href="assets/css/screens/lucky-spin-screen.css">
+</head>
+<body onclick="startGeneratedMusic()">
+<!-- START -->
+<div id="start" class="screen">
+  <h1>Word Search</h1>
+  <div class="container-pad" style="display:flex;flex-direction:column;align-items:center;">
+<button onclick="waitForButtonActive(function(){ goto('difficulty-screen'); })">Play</button>
+    <button onclick="clearLocalStorage()">Clear Local Storage</button>
+    <button onclick="resetGame()">Reset Progress</button>
+  </div>
+</div>
+<!-- DIFFICULTY -->
+<div id="difficulty-screen" class="screen hidden">
+  <h1>Choose Difficulty</h1>
+  <div id="difficulty-buttons">
+    <button data-diff="easy" onclick="waitForButtonActive(function(){ chooseDifficulty('easy'); })">Easy</button>
+    <button data-diff="normal" onclick="waitForButtonActive(function(){ chooseDifficulty('normal'); })">Normal</button>
+    <button data-diff="hard" onclick="waitForButtonActive(function(){ chooseDifficulty('hard'); })">Hard</button>
+    <button id="difficulty-back" onclick="waitForButtonActive(function(){ goto('start'); })">Back</button>
+  </div>
+</div>
+<!-- CATEGORY -->
+<div id="categories" class="screen hidden">
+  <h1>Choose Category</h1>
+  <div id="cat-grid" class="container-pad"></div>
+  <button onclick="waitForButtonActive(function(){ goto('difficulty-screen'); })">Back</button>
+</div>
+<!-- LEVELS -->
+<div id="levels" class="screen hidden">
+  <h1 id="level-title"></h1>
+  <div id="level-grid"></div>
+  <button onclick="waitForButtonActive(function(){ goto('categories'); })">Back</button>
+</div>
+<!-- GAME -->
+<div id="game" class="screen hidden">
+<span id="timer">00:00</span>
+<div id="coinDisplay">⭐ <span id="coinCount">0</span></div>
+<button id="hintBtn" onclick="waitForButtonActive(function(){ useHint(); })">💡(<span id="hintCount">0</span>)</button>
+  <h1 id="game-title"></h1>
+  <div id="grid"></div>
+  <div id="word-list"></div>
+<div id="game-buttons">
+  <button onclick="waitForButtonActive(function(){ goto('levels'); })">Back</button>
+  <button id="clearLevelBtn">Clear This Level</button>
+  <button id="toggle-blindmode-btn" onclick="waitForButtonActive(function(){ toggleBlindMode(); })">🕶️ Blind Mode: OFF</button>
+</div>
+</div>
+<!-- ✅ LEVEL COMPLETE POPUP -->
+<div id="levelPopup" class="popup hidden">
+  <div id="levelcompletedpopupbox">
+    <div class="popup-message">🎉 Level Complete!</div>
+    <div id="levelpopupbtns">
+    <button id="backbtn">back</button>
+    <button id="restartLevelbutton">Restart 🔄</button>
+    <button id="nextLevelbutton">Next Level ▶</button>
+  </div>
+  </div>
+</div>
+<!-- THREE-DOT MENU-->
+<div id="menu-container">
+  <button id="menu-btn">☰</button>
+  <div id="menu-popup" class="hidden">
+    <div class="menu-buttons">
+      <button onclick="waitForButtonActive(function(){ goto('settings-screen'); });">Settings</button>
+      <button onclick="waitForButtonActive(function(){ goto('achievements-screen'); });">Achievements</button>
+      <button onclick="waitForButtonActive(function(){ goto('profile-screen'); updateProfileScreen(); });">Profile</button>
+      <button onclick="waitForButtonActive(function(){ showDailyScreen(); });">Daily Puzzle</button>
+      <button onclick="waitForButtonActive(function(){ goto('tutorial-screen'); });">📘 How to Play</button>
+      <button onclick="waitForButtonActive(function(){ openSpin(); });" id="openLuckySpinBtn">🎡 Lucky Spin</button>
+      <button onclick="waitForButtonActive(function(){ goto('daily-reward-screen'); renderDailyRewards(); });">🎁 Daily Rewards</button>
+      <button onclick="waitForButtonActive(function(){ goto('shop-screen'); });">Shop</button>
+    </div>
+    <button id="menu-back-btn" onclick="triggerMenuAnimation('#menu-popup', false, 320);">Close Menu</button>
+  </div>
+</div>
+<!-- SETTINGS SCREEN -->
+<div id="settings-screen" class="screen hidden">
+  <h1>Settings</h1>
+<button onclick="waitForButtonActive(function(){ goto('themes-screen'); })">Themes</button>
+<button id="toggle-colorblind-btn" onclick="waitForButtonActive(function(){ toggleColorblindMode(); })">🎨 Colorblind: OFF</button>
+<button id="toggle-performance-btn" onclick="waitForButtonActive(function(){ togglePerformanceMode(); })">⚡Performance: OFF</button>
+<button id="music-toggle" onclick="waitForButtonActive(function(){ startGeneratedMusic(); })">🎹music: OFF</button>
+<button onclick="waitForButtonActive(function(){ goto('about-screen'); })">About</button>
+<button class="back-btn" onclick="waitForButtonActive(function(){ goto('start'); })">Back</button>
+</div>
+<!-- THEMES SCREEN -->
+<div id="themes-screen" class="screen hidden">
+  <h1>Choose Theme</h1>
+  <div id="theme-grid">
+  </div>
+  <button onclick="waitForButtonActive(function(){ goto('settings-screen'); });">Back</button>
+</div>
+<!-- ABOUT SCREEN -->
+<div id="about-screen" class="screen hidden">
+  <h1>About This Game</h1>
+  <div class="about-content">
+    <p>Welcome to <b>Word Explorer</b> — a puzzle adventure built with ❤️ and JavaScript!</p>
+    <p>Find hidden words, unlock colorful themes, and sharpen your mind — one level at a time.</p>
+    <div class="divider"></div>
+    <p><b>Developer:</b> Vijay R. M.</p>
+    <p><b>Version:</b> 1.0.3 (October 2025)</p>
+    <p><b>Engine:</b> HTML + CSS + JS</p>
+    <div class="divider"></div>
+    <div class="about-buttons">
+      <button onclick="alert('⭐ Thank you for supporting the game!')">Rate the Game</button>
+      <button onclick="alert('💡 Feedback feature coming soon!')">Send Feedback</button>
+      <button onclick="waitForButtonActive(function(){ goto('settings-screen'); });">Back</button>
+    </div>
+  </div>
+</div>
+<!-- ACHIEVEMENTS SCREEN -->
+<div id="achievements-screen" class="screen hidden">
+  <h1>🏆 Achievements</h1>
+  <div id="achievement-list"></div>
+  <button onclick="waitForButtonActive(function(){ goto('start'); })">Back</button>
+</div>
+<!-- 🏆 ACHIEVEMENT POPUP -->
+<div id="achievement-popup" class="hidden">🏆 Achievement Unlocked!</div>
+<div id="achievement-detail-popup" class="hidden popup">
+  <div class="popup-content">
+    <h2 id="popup-achievement-title">Achievement Name</h2>
+    <p id="popup-achievement-desc">Details about how to complete this achievement.</p>
+    <button id="popup-ok-btn">OK</button>
+  </div>
+</div>
+<!-- PROFILE SCREEN -->
+<div id="profile-screen" class="screen hidden">
+  <h2>👤 Player Profile</h2>
+  <div id="profile-container">
+    <p id="player-name">Player</p>
+    <p id="profile-progress">Levels Completed: 0</p>
+    <p id="profile-words">Words Found: 0</p>
+    <p id="profile-achievements">Achievements Unlocked: 0</p>
+    <p id="profile-theme">Current Theme: Default</p>
+    <p id="profile-coins">Coins: 0</p>
+  </div>
+  <button onclick="waitForButtonActive(function(){ goto('start'); })">Back</button>
+</div>
+<!-- 🌞 DAILY PUZZLE SCREEN -->
+<div id="daily-screen" class="screen hidden">
+  <h2>🌞 Daily Puzzle</h2>
+  <p id="daily-date"></p>
+  <p id="daily-status"></p>
+  <div class="daily-btns">
+    <button id="daily-play-btn" onclick="waitForButtonActive(function(){ startDailyPuzzle(); })">Play Now</button>
+    <button onclick="waitForButtonActive(function(){ goto('start'); })">Back</button>
+  </div>
+</div>
+<!-- 📘 TUTORIAL SCREEN -->
+<div id="tutorial-screen" class="screen hidden">
+  <h1>📘 How to Play</h1>
+  <div class="tutorial-container">
+    <h3>🎯 Goal</h3>
+    <p>Find all the hidden words by dragging across letters.</p>
+    <h3>🕹️ Controls</h3>
+    <p>Touch & drag to form words. Release to submit!</p>
+    <h3>⭐ Rewards</h3>
+    <ul>
+      <li>Earn coins for completing levels</li>
+      <li>Use coins to buy hints, themes & chests</li>
+      <li>Claim daily rewards for bonus prizes</li>
+    </ul>
+    <h3>🎁 Bonus Features</h3>
+    <ul>
+      <li>Unlock new themes</li>
+      <li>Open special chests</li>
+      <li>Collect amazing achievements</li>
+    </ul>
+  </div>
+  <button onclick="waitForButtonActive(function(){ goto('start'); })">Back</button>
+</div>
+<!-- LUCKY SPIN POPUP (paste near other popups, before closing </body>) -->
+<div id="luckySpin" class="hidden" aria-hidden="true">
+  <div id="luckySpinBox" role="dialog" aria-modal="true">
+    <h2 style="margin:0 0 8px 0">🎡 Lucky Spin</h2>
+    <div id="spinPointer" aria-hidden="true"></div>
+    <canvas id="spinCanvas" width="300" height="300"></canvas>
+    <div id="spinButtons">
+      <button id="freeSpinBtn" class="small">🎁 Free Spin</button>
+      <button id="buySpinBtn" class="small">💰 Buy Spin (30⭐)</button>
+      <button id="closeSpinBtn" class="small">Close</button>
+    </div>
+    <div id="spinResult" aria-live="polite" style="min-height:22px"></div>
+  </div>
+</div>
+<!-- 🎁 DAILY REWARD SCREEN -->
+<div id="daily-reward-screen" class="screen hidden">
+  <h2 class="screen-title">🎁 Daily Rewards</h2>
+  <div id="daily-calendar" class="daily-calendar">
+    <div class="day-tile" data-day="1"><div class="day-label">Day 1</div><div class="day-reward">50 ⭐</div><div class="day-note">Claim to keep streak</div></div>
+    <div class="day-tile" data-day="2"><div class="day-label">Day 2</div><div class="day-reward">70 ⭐+1💡</div><div class="day-note">Small boost</div></div>
+    <div class="day-tile" data-day="3"><div class="day-label">Day 3</div><div class="day-reward">100 ⭐</div><div class="day-note">Nice!</div></div>
+    <div class="day-tile" data-day="4"><div class="day-label">Day 4</div><div class="day-reward">140 ⭐+4💡</div><div class="day-note">Lucky 140</div></div>
+    <div class="day-tile" data-day="5"><div class="day-label">Day 5</div><div class="day-reward">190 ⭐</div><div class="day-note">Keep it up</div></div>
+    <div class="day-tile" data-day="6"><div class="day-label">Day 6</div><div class="day-reward">250 ⭐+8💡</div><div class="day-note">Almost there</div></div>
+  </div>
+  <div class="day7-row">
+    <div class="day-tile day-legendary" data-day="7">
+      <div class="day-label">Day 7</div>
+      <div class="day-reward">320 ⭐+12💡</div>
+      <div class="day-note">Lucky Day 7! Your weekly treat!</div>
+    </div>
+    <div class="day-tile day-legendary" data-day="7-chest">
+      <div class="day-label">Day 7</div>
+      <div class="day-reward">Legendary Chest</div>
+      <div class="day-note">Unlocks Legendary Chest</div>
+    </div>
+  </div>
+  <div class="daily-buttons">
+    <button id="claimRewardBtn">Claim Reward</button>
+    <button id="backToMenuBtn" onclick="waitForButtonActive(function(){ goto('start'); })">Back</button>
+  </div>
+</div>
+<!-- 🏪 SHOP SCREEN -->
+<div id="shop-screen" class="screen hidden">
+  <div class="shop-header">
+    <h1>🛍️ Game Shop</h1>
+    <p id="shopCoins">⭐Coins: 0</p>
+    <p id="shopHints">💡Hints: 0</p>
+  </div>
+  <div id="shop-scroll">
+    <div id="hint-section">
+      <h2>🎁 Buy Hints</h2>
+      <div id="hint-shop-grid">
+        <button onclick="waitForButtonActive(function(){ buyHintPack(1, 40); })">+1 Hint — 40⭐</button>
+        <button onclick="waitForButtonActive(function(){ buyHintPack(5, 180); })">+5 Hints — 180⭐</button>
+        <button onclick="waitForButtonActive(function(){ buyHintPack(10, 306); })">+10 Hints — 306⭐</button>
+      </div>
+    </div>
+    <div id="chest-section">
+      <h2>💎 Bonus Chests</h2>
+      <div id="chest-shop-grid">
+        <button class="common" onclick="waitForButtonActive(function(){ buyChest('common', 100); })">Common<br><small>100⭐</small></button>
+        <button class="rare" onclick="waitForButtonActive(function(){ buyChest('rare', 250); })">Rare<br><small>250⭐</small></button>
+        <button class="legendary" onclick="waitForButtonActive(function(){ buyChest('legendary', 500); })">Legendary<br><small>500⭐</small></button>
+      </div>
+    </div>
+    <div id="theme-section">
+      <h2>🎨 Unlock Themes</h2>
+      <div id="theme-shop-grid">
+      </div>
+    </div>
+  <div class="shop-footer">
+    <button onclick="waitForButtonActive(function(){ goto('start'); })">Back</button>
+  </div>
+ </div>
+</div>
+<!-- UNIVERSAL POPUP -->
+<div id="universalPopup" class="popup hidden">
+  <div id="popupbox">
+   <p id="popup-message"></p>
+    <button id="popup-ok">OK</button>
+  </div>
+</div>
+<script src="assets/js/themes.js"></script>
+<script src="assets/js/achievements.js"></script>
+<script src="assets/js/general.js"></script>
+<script src="assets/js/profession.js"></script>
+<script src="assets/js/animal.js"></script>
+<script src="assets/js/fruits.js"></script>
+<script src="assets/js/vehicles.js"></script>
+<script src="assets/js/colors.js"></script>
+<script src="assets/js/sports.js"></script>
+<script src="assets/js/flowers.js"></script>
+<script src="assets/js/foods.js"></script>
+<script src="assets/js/drinks.js"></script>
+<script src="assets/js/categories.js"></script>
+<script src="assets/js/globals.js"></script>
+<script src="assets/js/utils.js"></script>
+<script src="assets/js/timer.js"></script>
+<script src="assets/js/navigation.js"></script>
+<script src="assets/js/roate.js"></script>
+<script src="assets/js/difficulty.js"></script>
+<script src="assets/js/levels.js"></script>
+<script src="assets/js/grid.js"></script>
+<script src="assets/js/gameplay.js"></script>
+<script src="assets/js/shop.js"></script>
+<script src="assets/js/hints.js"></script>
+<script src="assets/js/coins.js"></script>
+<script src="assets/js/daily.js"></script>
+<script src="assets/js/luckyspin.js"></script>
+<script src="assets/js/profile.js"></script>
+</body>
+</html>
