@@ -112,7 +112,7 @@ function buyHintPack(amount, cost) {
   coins = Number(localStorage.getItem("coins") || 0);
   hints = Number(localStorage.getItem("hints") || 0);
   if (coins < cost) {
-    showPopup(` You bought +${amount} hints for ${cost} coins!`);
+    showPopup(`⚠️ Not enough coins! You need ${cost} coins to buy ${amount} hints.`);
     return;
   }
   coins -= cost;
@@ -122,7 +122,7 @@ function buyHintPack(amount, cost) {
   localStorage.setItem("persistentHintsBackup", hints);
   updateCoinDisplay();
   updateHintDisplay();
-  showPopup(` You bought +${amount} hints for ${cost} coins!`);
+  showPopup(`💡 You bought +${amount} hints for ${cost} coins!`);
 }
 function showChestPopup(type, coinsGained, hintsGained) {
   const popup = document.getElementById("universalPopup");
