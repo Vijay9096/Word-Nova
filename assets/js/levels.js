@@ -35,9 +35,6 @@ function startLevel() {
     triggerLevelIntro("#grid");
     renderWordList(Object.keys(placedWords));
     triggerWordListSlideIn();
-    if (currentMode === 'blind-list') {
-        hideWordList();
-      }
     for (const w of foundWords) {
       const coords = placedWords[w];
       const color = foundColors[w] || 'yellow';
@@ -53,11 +50,6 @@ function startLevel() {
     }
   } else {
   generateGrid(currentCat);
-    setTimeout(() => {
-      if (currentMode === 'blind-list') {
-    hideWordList();
-      }
-    }, 40);
   }
 }
 function chooseWords(cat, count) {

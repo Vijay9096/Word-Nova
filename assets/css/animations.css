@@ -16,7 +16,9 @@
 @keyframes hintPulse { 0% { transform: scale(1); } 40% { transform: scale(1.14); } 80% { transform: scale(0.96); } 100% { transform: scale(1); } }
 @keyframes grid-breathe { 0% { transform: scale(1); } 25% { transform: scale(1.007); } 50% { transform: scale(1.014); } 75% { transform: scale(1.007); } 100% { transform: scale(1); } }
 @keyframes wordlistSlideIn { 0% { transform: translateY(40px); opacity: 0; } 70% { transform: translateY(8px); opacity: 1; } 100% { transform: translateY(0); opacity: 1; } }
+@keyframes wordListSlideIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
+.wordlist-slide-in { animation: wordListSlideIn 0.5s ease; }
 .cell.hinted { animation: hintFlash 0.8s ease-in-out 2; }
 .flash { animation: flashGlow 0.8s ease-in-out 4; }
 .shake { animation: shakeAnimStrong 0.45s ease; }

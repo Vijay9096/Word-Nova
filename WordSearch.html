@@ -67,7 +67,6 @@
 <div id="game-buttons">
   <button onclick="waitForButtonActive(function(){ goto('levels'); })">Back</button>
   <button id="clearLevelBtn">Clear This Level</button>
-  <button id="toggle-blindmode-btn" onclick="waitForButtonActive(function(){ toggleBlindMode(); })">🕶️ Blind Mode: OFF</button>
 </div>
 </div>
 <!-- ✅ LEVEL COMPLETE POPUP -->
@@ -104,7 +103,7 @@
 <button onclick="waitForButtonActive(function(){ goto('themes-screen'); })">Themes</button>
 <button id="toggle-colorblind-btn" onclick="waitForButtonActive(function(){ toggleColorblindMode(); })">🎨 Colorblind: OFF</button>
 <button id="toggle-performance-btn" onclick="waitForButtonActive(function(){ togglePerformanceMode(); })">⚡Performance: OFF</button>
-<button id="music-toggle" onclick="waitForButtonActive(function(){ startGeneratedMusic(); })">🎹music: OFF</button>
+<button id="music-toggle"onclick="waitForButtonActive(function(){ toggleMusic(); })">🎹 Music: ON</button>
 <button onclick="waitForButtonActive(function(){ goto('about-screen'); })">About</button>
 <button class="back-btn" onclick="waitForButtonActive(function(){ goback(); })">Back</button>
 </div>
@@ -277,21 +276,31 @@
     <button id="popup-ok">OK</button>
   </div>
 </div>
+
 <script src="assets/js/themes.js"></script>
 <script src="assets/js/achievements.js"></script>
 <script src="assets/js/general.js"></script>
 <script src="assets/js/profession.js"></script>
+
 <script src="assets/js/animal.js"></script>
 <script src="assets/js/fruits.js"></script>
 <script src="assets/js/vehicles.js"></script>
 <script src="assets/js/colors.js"></script>
+
 <script src="assets/js/sports.js"></script>
 <script src="assets/js/flowers.js"></script>
 <script src="assets/js/foods.js"></script>
 <script src="assets/js/drinks.js"></script>
+
 <script src="assets/js/categories.js"></script>
 <script src="assets/js/globals.js"></script>
 <script src="assets/js/utils.js"></script>
+<script src="assets/js/popup.js"></script>
+
+<script src="assets/js/audio.js"></script>
+<script src="assets/js/settings.js"></script>
+<script src="assets/js/animations.js"></script>
+
 <script src="assets/js/timer.js"></script>
 <script src="assets/js/navigation.js"></script>
 <script src="assets/js/roate.js"></script>
@@ -301,6 +310,7 @@
 <script src="assets/js/gameplay.js"></script>
 <script src="assets/js/shop.js"></script>
 <script src="assets/js/hints.js"></script>
+
 <script src="assets/js/coins.js"></script>
 <script src="assets/js/daily.js"></script>
 <script src="assets/js/luckyspin.js"></script>

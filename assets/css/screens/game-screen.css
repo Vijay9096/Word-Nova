@@ -14,4 +14,3 @@
 #game-buttons button:active { transform: scale(0.95); }
 #coinDisplay { position: absolute; top: 30px; left: 140px; font-size: 1.1rem; font-weight: bold; color: var(--text); background: rgba(255, 255, 255, 0.1); padding: 6px 12px; border-radius: 10px; box-shadow: 0 3px 6px rgba(0,0,0,0.3); }
 #timer { position: absolute; top: 30px; right:100px; font-size: 1.1rem; font-weight: bold; color: var(--text); background: rgba(255, 255, 255, 0.1); padding: 6px 12px; border-radius: 10px; box-shadow: 0 3px 6px rgba(0,0,0,0.3); }
-#word-list.wordlist-blind { opacity: 0; pointer-events: none; user-select: none;}
