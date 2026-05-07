@@ -11,6 +11,15 @@ let currentMode = "normal";
 let hintPopupRunning = false;
 let hintQueue = [];
 let hintPopupTimer = null;
+let menuPreviousScreen = "start";
+
+const menuScreens = [ 
+    'settings-screen','achievements-screen','profile-screen',
+    'daily-screen','daily-reward-screen','shop-screen','tutorial-screen'
+];
+const ignoreScreens = [
+    'settings-screen','themes-screen','about-screen'
+];
 
 let unlockedAchievements = JSON.parse(localStorage.getItem("unlockedAchievements") || "[]");
 let usedWords = JSON.parse(localStorage.getItem("usedWords") || "{}");

@@ -106,7 +106,7 @@
 <button id="toggle-performance-btn" onclick="waitForButtonActive(function(){ togglePerformanceMode(); })">⚡Performance: OFF</button>
 <button id="music-toggle" onclick="waitForButtonActive(function(){ startGeneratedMusic(); })">🎹music: OFF</button>
 <button onclick="waitForButtonActive(function(){ goto('about-screen'); })">About</button>
-<button class="back-btn" onclick="waitForButtonActive(function(){ goto('start'); })">Back</button>
+<button class="back-btn" onclick="waitForButtonActive(function(){ goback(); })">Back</button>
 </div>
 <!-- THEMES SCREEN -->
 <div id="themes-screen" class="screen hidden">
@@ -137,7 +137,7 @@
 <div id="achievements-screen" class="screen hidden">
   <h1>🏆 Achievements</h1>
   <div id="achievement-list"></div>
-  <button onclick="waitForButtonActive(function(){ goto('start'); })">Back</button>
+  <button onclick="waitForButtonActive(function(){ goback(); })">Back</button>
 </div>
 <!-- 🏆 ACHIEVEMENT POPUP -->
 <div id="achievement-popup" class="hidden">🏆 Achievement Unlocked!</div>
@@ -159,7 +159,7 @@
     <p id="profile-theme">Current Theme: Default</p>
     <p id="profile-coins">Coins: 0</p>
   </div>
-  <button onclick="waitForButtonActive(function(){ goto('start'); })">Back</button>
+  <button onclick="waitForButtonActive(function(){ goback(); })">Back</button>
 </div>
 <!-- 🌞 DAILY PUZZLE SCREEN -->
 <div id="daily-screen" class="screen hidden">
@@ -168,7 +168,7 @@
   <p id="daily-status"></p>
   <div class="daily-btns">
     <button id="daily-play-btn" onclick="waitForButtonActive(function(){ startDailyPuzzle(); })">Play Now</button>
-    <button onclick="waitForButtonActive(function(){ goto('start'); })">Back</button>
+    <button onclick="waitForButtonActive(function(){ goback(); })">Back</button>
   </div>
 </div>
 <!-- 📘 TUTORIAL SCREEN -->
@@ -192,7 +192,7 @@
       <li>Collect amazing achievements</li>
     </ul>
   </div>
-  <button onclick="waitForButtonActive(function(){ goto('start'); })">Back</button>
+  <button onclick="waitForButtonActive(function(){ goback(); })">Back</button>
 </div>
 <!-- LUCKY SPIN POPUP (paste near other popups, before closing </body>) -->
 <div id="luckySpin" class="hidden" aria-hidden="true">
@@ -233,7 +233,7 @@
   </div>
   <div class="daily-buttons">
     <button id="claimRewardBtn">Claim Reward</button>
-    <button id="backToMenuBtn" onclick="waitForButtonActive(function(){ goto('start'); })">Back</button>
+    <button id="backToMenuBtn" onclick="waitForButtonActive(function(){ goback(); })">Back</button>
   </div>
 </div>
 <!-- 🏪 SHOP SCREEN -->
@@ -266,7 +266,7 @@
       </div>
     </div>
   <div class="shop-footer">
-    <button onclick="waitForButtonActive(function(){ goto('start'); })">Back</button>
+    <button onclick="waitForButtonActive(function(){ goback(); })">Back</button>
   </div>
  </div>
 </div>

@@ -1,9 +1,11 @@
 function goto(id) {
+  const activeScreen = document.querySelector('.screen:not(.hidden)');
+  if ( activeScreen && menuScreens.includes(id) && !ignoreScreens.includes(activeScreen.id) ) { menuPreviousScreen = activeScreen.id; }
   if (id === "shop-screen") {
-  coins = Number(localStorage.getItem("coins") || 0);
-  hints = Number(localStorage.getItem("hints") || 0);
-  renderShop();
-}
+    coins = Number(localStorage.getItem("coins") || 0);
+    hints = Number(localStorage.getItem("hints") || 0);
+    renderShop();
+  }
   document.querySelectorAll('.screen').forEach(s => s.classList.add('hidden'));
   const target = document.getElementById(id);
   if (target) target.classList.remove('hidden');
@@ -17,19 +19,20 @@ function goto(id) {
   if (id === "profile-screen") updateProfileScreen();
   if (id === "daily-reward-screen" || id === "daily-screen") {
   if (typeof refreshDailyUI === "function") refreshDailyUI();
-}
+  }
   const clearBtn = document.getElementById('clearLevelBtn');
   if (clearBtn) clearBtn.style.display = (id === 'game') ? 'block' : 'none';
   const menuContainer = document.getElementById('menu-container');
   const menuPopup = document.getElementById('menu-popup');
   const hideOnScreens = [
-    'themes-screen','settings-screen','achievements-screen','profile-screen',
-    'daily-screen','rewards-screen','shop-screen','texture-screen'
+    'themes-screen','settings-screen','achievements-screen',
+    'profile-screen','daily-screen','rewards-screen','shop-screen',
   ];
   const shouldHide = hideOnScreens.includes(id);
   if (menuContainer) menuContainer.style.display = shouldHide ? 'none' : 'block';
   if (menuPopup) menuPopup.classList.add('hidden');
 }
+function goback() { goto(menuPreviousScreen); }
 window.addEventListener('DOMContentLoaded', () => {
   const menuBtn = document.getElementById('menu-btn');
   const menuPopup = document.getElementById('menu-popup');
