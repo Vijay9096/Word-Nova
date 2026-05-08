@@ -7,6 +7,7 @@
 <title>Word Search</title>
 <link rel="stylesheet" href="assets/css/main.css">
 <link rel="stylesheet" href="assets/css/animations.css">
+<link rel="stylesheet" href="assets/css/screens/splash-screen.css">
 <link rel="stylesheet" href="assets/css/screens/start-screen.css">
 <link rel="stylesheet" href="assets/css/screens/difficulty-screen.css">
 <link rel="stylesheet" href="assets/css/screens/categories-screen.css">
@@ -25,6 +26,16 @@
 <link rel="stylesheet" href="assets/css/screens/lucky-spin-screen.css">
 </head>
 <body onclick="startGeneratedMusic()">
+<!-- SPLASH -->
+<div id="splash-screen">
+    <img src="splash.png" id="splash-bg">
+    <div id="loading-area">
+        <div id="loading-text">0%</div>
+        <div id="loading-container">
+            <div id="loading-bar"></div>
+        </div>
+    </div>
+</div>
 <!-- START -->
 <div id="start" class="screen">
   <h1>Word Search</h1>
