@@ -30,17 +30,17 @@
 <div id="splash-screen">
     <img src="splash.png" id="splash-bg">
     <div id="loading-area">
-        <div id="loading-text">0%</div>
-        <div id="loading-container">
-            <div id="loading-bar"></div>
-        </div>
+    <div id="loading-text">0%</div>
+    <div id="loading-container">
+    <div id="loading-bar"></div>
+      </div>
     </div>
 </div>
 <!-- START -->
 <div id="start" class="screen">
   <h1>Word Search</h1>
   <div class="container-pad" style="display:flex;flex-direction:column;align-items:center;">
-<button onclick="waitForButtonActive(function(){ goto('difficulty-screen'); })">Play</button>
+    <button onclick="waitForButtonActive(function(){ goto('difficulty-screen'); })">Play</button>
     <button onclick="clearLocalStorage()">Clear Local Storage</button>
     <button onclick="resetGame()">Reset Progress</button>
   </div>
