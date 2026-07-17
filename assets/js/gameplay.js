@@ -122,15 +122,25 @@ function markLevelDone() {
   };
  }
  const nextBtn = document.getElementById("nextLevelbutton");
-  if (nextBtn) {
-  nextBtn.onclick = function() {
+if (nextBtn) {
+  nextBtn.onclick = function () {
     waitForButtonActive(function () {
       popup.classList.add("hidden");
-      goto("game");
-      startLevel();
+      if (lockedLevel < TOTAL_LEVELS - 1) {
+        goto("game");
+        startLevel();
+        return;
+      }
+      const categories = Object.keys(CATEGORIES);
+      const currentIndex = categories.indexOf(currentCat);
+      if (currentIndex < categories.length - 1) {
+        goto("categories");
+      } else {
+        goto("difficulty-screen");
+      }
     });
   };
- }
+}
 const restartBtn = document.getElementById("restartLevelbutton");
 if (restartBtn) {
   restartBtn.onclick = function () {

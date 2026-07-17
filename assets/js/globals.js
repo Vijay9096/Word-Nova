@@ -12,6 +12,7 @@ let hintPopupRunning = false;
 let hintQueue = [];
 let hintPopupTimer = null;
 let menuPreviousScreen = "start";
+const TOTAL_LEVELS = 100;
 
 const menuScreens = [ 
     'settings-screen','achievements-screen','profile-screen',
