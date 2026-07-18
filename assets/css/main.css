@@ -9,7 +9,7 @@ h1 { text-align: center; margin: 1rem 0; font-size: 1.8rem; letter-spacing: 1px;
 button { background: var(--accent); color: var(--text); border: none; padding: 0.6rem 1.4rem; margin: 0.3rem; border-radius: 14px; font-size: 1.05rem; font-weight: bold; cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.3); transition: all 0.25s ease; transition: transform 0.1s ease, box-shadow 0.15s ease; }
 button:active { transform: scale(0.95); }
 .screen { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-.hidden { opacity: 0; pointer-events: none; transition: 0.3s; }
+.hidden { display: none; opacity: 0; pointer-events: none; transition: 0.3s; }
 .container-pad { display:flex; flex-direction:column; align-items:center; width: 90%; max-width: 700px; }
 .popup { position: fixed; inset: 0; background: rgba(0,0,0,0.6); display: flex; align-items: center; justify-content: center; z-index: 99999; }
 .popup.hidden { display: none; }

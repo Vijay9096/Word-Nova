@@ -121,10 +121,10 @@ function markLevelDone() {
     });
   };
  }
- const nextBtn = document.getElementById("nextLevelbutton");
-if (nextBtn) {
-  nextBtn.onclick = function () {
-    waitForButtonActive(function () {
+  const nextBtn = document.getElementById("nextLevelbutton");
+  if (nextBtn) {
+  nextBtn.onclick = function() {
+    waitForButtonActive(function() {
       popup.classList.add("hidden");
       if (lockedLevel < TOTAL_LEVELS - 1) {
         goto("game");
@@ -132,11 +132,20 @@ if (nextBtn) {
         return;
       }
       const categories = Object.keys(CATEGORIES);
-      const currentIndex = categories.indexOf(currentCat);
-      if (currentIndex < categories.length - 1) {
+      const currentCategoryIndex = categories.indexOf(currentCat);
+      if (currentCategoryIndex < categories.length - 1) {
+        showToast(`🎉 Category Complete!You have completed all levels in "${currentCat}".`);
         goto("categories");
-      } else {
+        return;
+      }
+      const difficulties = ["easy", "normal", "hard"];
+      const currentDifficultyIndex = difficulties.indexOf(currentDifficulty);
+      if (currentDifficultyIndex < difficulties.length - 1) {
+        showToast(`🏆 Difficulty Complete!\nYou have completed all categories in ${currentDifficulty}.`);
         goto("difficulty-screen");
+      } else {
+        showToast("👑 Congratulations! You have completed every category and every difficulty in Word Nova.");
+        goto("start");
       }
     });
   };
